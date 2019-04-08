@@ -67,14 +67,14 @@
 \begin{minipage}{0.295\textwidth} 
 \raggedright
 \footnotesize
-Name Surname \hfill\\   
-Student ID \hfill\\
-email
+Andra-Denis Ionescu \hfill\\   
+47224985 \hfill\\
+A.D.Ionescu@student.tudelft.nl
 \end{minipage}
 \begin{minipage}{0.4\textwidth} 
 \centering 
 \large 
-The title of the proposal\\ 
+An objective evaluation of schema matching techniques\\ 
 \normalsize 
 Thesis Proposal\\ 
 \end{minipage}
@@ -90,35 +90,56 @@ Thesis Proposal\\
 %-------------------------------
 
 \section{Introduction}
-Here you will clearly introduce the reader to the research area of the thesis. If you want to follow Stanford InfoLab's patented five-point structure for Introductions (thank you Jennifer Widom!), you will simply have to answer the following questions (roughly 5-6 sentences each):
-\begin{itemize}
-    \item What is the problem? 
-    \item Why is it interesting and important?
-    \item Why is it hard? (E.g., why do naive approaches fail?)
-    \item Why hasn't it been solved before? (Or, what's wrong with previous proposed solutions? How does mine differ?)
-    \item What are the key components of my approach and results? Also include any specific limitations.
-\end{itemize}
 
-Please provide some references to seminal papers of the area of research you are working in. Google Scholar is your friend. Select papers that are important; an important paper has been published in a good conference, it has a good number of citations and it has had impact in the research world. Avoid as much as possible to cite blogs. They will be gone in some months - your thesis will be out there forever. 
+Schema matching is an important matter in the database area such as data integration, data warehouse or message mapping. The problem relates to identifying corresponding elements in different schemas, difficult task that used to be performed manually. Nowadays, multiple algorithms and systems have been developed to address this issue, from semantic matching to clustering and machine learning algorithms. In a big setting, where there are hundreds of databases, each with its own schema and terminology, is very challenging to find a matching between any element. \\
+
+Therefore, it has become an important issue in the database community and it has been actively researched on. Building and maintaining such a system that is spread across multiple databases is a very labour intensive task, that requires human supervision. Most of the times, the relations between elements can not be distinguished easily, mostly because its poor design and documentation. Moreover, with the hardware evolvement and the possibility to store even more data, schema matching importance is increasing tremendously. \\
+
+The complexity of the matter relies on the possibility to distinguish a match and a non match. The match operation is analysed not only syntactically, but also semantically. Sometimes the corresponding data is analysed in order to disambiguate the elements. Some methodologies are using either the syntax to find similarities, or only the semantics, others have been trying to use unsupervised learning techniques, such as clustering, while others have been focusing on traditional machine learning algorithm and similarities measures. \\
+
+The existing solutions claim to solve the problem of schema matching, but in an abstract and vague way. They describe in a concise manner the implementation, without complete details such as the algorithms and their hyper parameters, certain thresholds and the motivation behind them and in some cases, no implementation details are given, but rather an abstract summary of the approach. Moreover, the results claimed lack an evaluation methodology and a concrete dataset, considering only the outcome and focusing mostly on the numbers. \\
+
+The purpose of this research is to create a benchmarking methodology for the existing solutions and an objective comparison between them. Therefore, the work aims to report missing key methods and propose alternatives that can conduct to similar results and build a foundation for the future research.  
 
 %------------------------------------------------
 
 
 \section{State of the Art}
-Here you will build a relatively complete list of papers that already solve the problem you are trying to solve (or a very similar one). If you think that your problem is very novel (i.e., nobody has attacked it before) please think twice. Most probably you are missing something. However, if indeed your problem has never been tackled before, you have to convince the reader how come this is the case. A good state-of-the-art section lists papers, giving a short summary of the contributions of those papers are (i.e., what they offer to the literature). After you list those contributions, you have to say how they fall short (i.e., why they do not solve your problem) and what you think your thesis will do to tackle your problem.
+Here you will build a relatively complete list of papers that already solve the problem you are trying to solve (or a very similar one). If you think that your problem is very novel (i.e., nobody has attacked it before) please think twice. Most probably you are missing something. However, if indeed your problem has never been tackled before, you have to convince the reader how come this is the case. A good state-of-the-art section lists papers, giving a short summary of the contributions of those papers are (i.e., what they offer to the literature). After you list those contributions, you have to say how they fall short (i.e., why they do not solve your problem) and what you think your thesis will do to tackle your problem. \\
+
+The starting papers for my thesis and the ones that will be analysed and criticised are presented next, together with a short summary of their contribution and why I consider they need improvements. \\
+
+The Cupid framework \cite{madhavan2001generic} has a very interesting approach because it starts from the taxonomy introduced by Rahm and Bernstein \cite{rahm2001matching} and evaluates the framework based on the comparison with other frameworks that were introduced until that time. Their approach is focused on schema-based elements and they introduce multiple methods such as weighted similarities based on linguistic and structural matching and schema trees converted in Direct Acyclic Graphs (DAG). The paper tries to detail the methodology, but key factors such as multiple thresholds used, how they connect certain methods and the choices in terms of algorithms and thesaurus are missing. \\
+
+In 2005, Madhavan et al \cite{madhavan2005corpus} propose a methodology where they use existing schema information to enhance the matching for the new schema elements. Their approach is schema-based and instance-based and it uses machine learning algorithms to determine the similarities between elements. The research lacks implementation details such as the concrete algorithms used for training, together with their hyperparameters. They make use of many mathematics formulas that are not described properly and they give no indication of how the constants should be used such as intervals or specific values. Compared to the previous study, they do indicate the dataset and give the resource for it, they construct an evaluation methodology and discuss the results. 
+
+From supervised learning to unsupervised learning, Zhang et al \cite{zhang2011automatic} researched a new approach for schema matching based on clustering. They focused not only on the schema elements, but on the schema relations as well, because they consider that the relations can help understanding if two columns are truely a match or not a match. They partition the data into distribution clusters based on the distribution similarity metric introduced in \cite{zhang2010multi}, called Earth Mover's Distance (EMD). It is a complex research, based solely on mathematics that can represent a challenge from computer science perspective. In the evaluation section, they do indicate the datasets and their sources and specify the metrics used (precision and recall). An interesting aspect in the evaluation section is the fact that they computed several views from the data, in order to enrich the datasets which can add bias to the results. 
+
+In 2015, Microsoft \cite{cortez2015annotating} published a research that claims to help enrich the databases by finding a match between the schema and spreadsheets which contain potential information to disambiguate the schema elements. They create a new similarity metric based on Jaccard Similarity, test it in their own environment and report good results. The challenge is finding if the approach is a good solution in another environment or if the similarity metric can perform good in other settings. 
 
 
 \section{Thesis Objective}
-The objective of the thesis is, of course, to solve the problem that you mentioned above. However, some problems are too big to be addresses/sollved within a thesis. In this section try to become a bit more specific on what the objective of this thesis is, rather than simply repeating that you want to solve the problem mentioned in the introduction. We need some more details here.
 
-\subsection{Optional: Concrete Research Question}
-Try to clearly formulate your problem in a strict fashion. Sometimes math can be used here if you have a clear idea of what problem you want to solve. 
+The objective of the thesis is to make a straight comparison between different schema matching techniques and to build a foundation for the future research. Through this research, I will help disambiguate the schema matching methodologies, while building an effective framework to compare them. More specifically, my contribution is the following: 
 
-\subsection{Optional: Contributions}
-State here in a bullet list, what your contributions are going to be. 
+\begin{itemize}
+	\item An extensive literature survey \\
+	Starting from the taxonomy build by Rahm and Bernstein \cite{rahm2001survey}, I will extend the taxonomy and improve it by adding and highlighting the new schema matching methodologies.
+	\item A concrete implementation of selected methodologies \\
+	The implementation purpose is to disambiguate the methods by adding the missing details and creating a complete solution. Moreover, the implementation will be publicly available in the research community. 
+	\item A benchmark dataset which will be used to evaluate the methodologies \\
+	An important detail that is generally missing from the previous research is the dataset. Therefore, I will create a public dataset that can be used for all the algorithms implemented and I will detail its advantages and limitations.
+	\item An evaluation approach \\
+	I will design a benchmarking framework that will be used to evaluate all the methodologies. 
+	\item Present the results \\
+	The methods will be evaluated according to the designed approach on the benchmark dataset and the results will be objectively analysed. 
+\end{itemize}
 
 \section{Milestones and Deliverables}
 How are you going to approach your thesis project? Make a concrete plan and insert a Gantt chart describing the various (high level) tasks that you plan to tackle your research problem and write your thesis. 
+
+
+\printbibliography[heading=bibintoc]
 
 %------------------------------------------------
 
